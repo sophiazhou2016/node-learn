@@ -1,8 +1,8 @@
 function add (a, b) {
-    console.log(a + b)
+    return a + b
 }
 function mult (a, b) {
-    console.log(a * b)
+    return a * b
 }
 
 module.exports = {
