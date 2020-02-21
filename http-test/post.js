@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
         req.on('data', chunk => {
             postdata += chunk.toString() // chunk是二进制，所以需要转成string
         })
-        req.on('end', () => {
+        re.on('end', () => {
             console.log('postdata:', postdata)
             res.end('hello world!')
         })
