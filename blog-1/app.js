@@ -3,6 +3,9 @@ const handleUserRouter = require('./src/router/user')
 const serverHandle = (req, res) => {
     res.setHeader('content-type', 'application/json')
 
+    const url = req.url
+    req.path = url.split('?')[0]
+
     // 处理blog路由
     const blogData = handleBlogRouter(req, res)
     if(blogData) {
