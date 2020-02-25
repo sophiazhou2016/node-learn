@@ -27,3 +27,8 @@ class ErrorModel extends BaseModel {
         thiis.errno = -1
     }
 }
+
+module.exports = {
+    SuccessModel,
+    ErrorModel
+}
