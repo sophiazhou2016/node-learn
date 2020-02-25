@@ -9,7 +9,8 @@ const getPostData = (req) => {
             resolve({})
             return
         }
-        if(req.headers['Content-type'] !== 'application/json') {
+        console.log('req.headers---', req.headers)
+        if(req.headers['content-type'] !== 'application/json') {
             resolve({})
             return
         }
@@ -59,7 +60,7 @@ const serverHandle = (req, res) => {
         }
 
         // 未命中路由， 返回 404
-        res.writeHead(404, {"Content-type": "text/plain"}) // 纯文本
+        res.writeHead(404, {"content-type": "text/plain"}) // 纯文本
         res.write("404 Not Found\n")
         res.end()
     })

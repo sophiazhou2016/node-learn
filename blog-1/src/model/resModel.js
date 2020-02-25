@@ -24,7 +24,7 @@ class SuccessModel extends BaseModel {
 class ErrorModel extends BaseModel {
     constructor(data, message) {
         super(data, message)
-        thiis.errno = -1
+        this.errno = -1
     }
 }
 
