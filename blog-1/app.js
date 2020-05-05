@@ -72,10 +72,13 @@ const serverHandle = (req, res) => {
             SESSION_DATA[userId] = {}
         }
     } else {
+        // 第一次没有userid
+        // 标记需要设置cookie
         needSetCookie = true
-        userId = `${Date.now()}_${Math.random()}`
+        userId = `${Date.now()}_${Math.random()}` // userId随机赋值
         SESSION_DATA[userId] = {}
     }
+    // login之后设置了session，就是设置了SESSION_DATA[userId]
     req.session = SESSION_DATA[userId]
 
     console.log('its cookies:', req.cookie)
@@ -94,6 +97,7 @@ const serverHandle = (req, res) => {
         const blogResult = handleBlogRouter(req, res)
         if(blogResult) {
             blogResult.then(blogData => {
+                // 第一次设置cookie
                 if(needSetCookie) {
                     res.setHeader('Set-cookie', `userid=${userId};path=/;httpOnly;expires=${getCookieExpires()}`)
                 }
