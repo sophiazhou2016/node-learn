@@ -26,5 +26,6 @@ function exec(sql) {
 // 保持连接状态，不使用con.end()
 
 module.exports = {
-    exec
+    exec,
+    escape: mysql.escape
 }

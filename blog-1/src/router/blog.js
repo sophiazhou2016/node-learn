@@ -9,6 +9,7 @@ const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 // 统一的登录验证函数
 const loginCheck = (req) => {
+    console.log('loginCheck:::req:', req.session)
     if(!req.session.username) {
         return Promise.resolve(new ErrorModel('尚未登录'))
     }
@@ -25,9 +26,12 @@ const handleBlogRouter = (req, res) => {
         let author = req.query.author || ''
         const keyword = req.query.keyword || ''
         // const listData = getList(author, keyword)
+        console.log(1)
         if(req.query.isadmin) {
+            console.log(2)
             // 管理员界面
             const loginCheckResult = loginCheck(req)
+            console.log(3, loginCheckResult)
             if(loginCheckResult) {
                 // 未登录
                 return loginCheckResult

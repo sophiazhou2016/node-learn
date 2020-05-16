@@ -11,6 +11,7 @@ function set(key, val) {
     if(typeof val === 'object') {
         val = JSON.stringify(val)
     }
+    console.log('set key', key, val)
     redisClient.set(key, val, redis.print)
 }
 
@@ -32,6 +33,7 @@ function get(key) {
             } catch(ex) {
                 resolve(val)
             }
+            console.log('get ---- val:', val)
             resolve(val)
             // 退出
             // redisClient.quit()

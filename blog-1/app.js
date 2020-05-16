@@ -62,7 +62,7 @@ const serverHandle = (req, res) => {
             return
         }
         const arr = item.split('=')
-        const key = arr[0]
+        const key = arr[0].trim()
         const value = arr[1]
         req.cookie[key] = value
     })
@@ -88,6 +88,7 @@ const serverHandle = (req, res) => {
     // 解析 session (使用redis)
     let needSetCookie = false
     let userId = req.cookie.userid
+    // console.log('req.cookie.userid:', req.cookie, req.cookie.userid)
     if(!userId) {
         needSetCookie = true
         userId = `${Date.now()}_${Math.random()}` // userId随机赋值
@@ -96,7 +97,9 @@ const serverHandle = (req, res) => {
     }
     // 获取session
     req.sessionId = userId
+    // console.log('req.sessionId:', req.sessionId)
     get(req.sessionId).then(sessionData => {
+        // console.log('sessionData:', sessionData)
         if(sessionData === null) {
             // 初始化 redis中的session值
             set(req.sessionId, {})
@@ -105,7 +108,7 @@ const serverHandle = (req, res) => {
         } else {
             req.session = sessionData
         }
-        console.log('req.session:', req.session)
+        // console.log('req.session:', req.session)
         // 处理 post data
         return getPostData(req)
     })
