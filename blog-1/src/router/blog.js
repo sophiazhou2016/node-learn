@@ -26,9 +26,7 @@ const handleBlogRouter = (req, res) => {
         let author = req.query.author || ''
         const keyword = req.query.keyword || ''
         // const listData = getList(author, keyword)
-        console.log(1)
         if(req.query.isadmin) {
-            console.log(2)
             // 管理员界面
             const loginCheckResult = loginCheck(req)
             console.log(3, loginCheckResult)

@@ -4,16 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 const blogRouter = require('./routes/blog');
 const userRouter = require('./routes/user');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(logger('dev')); // app.use： 注册
 app.use(express.json()); // postdada json格式
@@ -23,8 +23,8 @@ app.use(cookieParser()); // req.cookies
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // 注册路由
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 app.use('/api/blog', blogRouter); // 父路由的好处：修改方便
 app.use('/api/user', userRouter); // 父路由的好处：修改方便
 
