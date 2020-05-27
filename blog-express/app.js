@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -20,6 +21,15 @@ app.use(express.json()); // postdada json格式
 app.use(express.urlencoded({ extended: false })); // x-www-form-urlencoded
 // 为了 req.body
 app.use(cookieParser()); // req.cookies
+
+app.use(session({
+  secret: 'WJiol_123123#',
+  cookie: {
+    // path: '/', // 默认
+    // httpOnly: true, // 默认
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // 注册路由
