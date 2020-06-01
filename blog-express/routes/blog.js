@@ -20,8 +20,10 @@ router.get('/list', (req, res, next) => {
     const keyword = req.query.keyword || ''
 
     if(req.query.isadmin) {
+        console.log('is admin');
         // 管理员界面
         if(req.session.username === null) {
+            console.error('is admin, not login')
             // 未登录
             res.json(
                 new ErrorModel('未登录')
@@ -33,7 +35,6 @@ router.get('/list', (req, res, next) => {
     }
     const result = getList(author, keyword)
     return result.then(listData => {
-        console.log('router listData:', listData)
         res.json(
             new SuccessModel(listData)
         )
@@ -72,9 +73,7 @@ router.post('/update', loginCheck, (req, res, next) => {
 router.post('/del', loginCheck, (req, res, next) => {
     const author = req.session.username;
     const result = delBlog(req.query.id, author)
-    console.log('author: ', author, result);
     return result.then(val => {
-        console.log('del:val:', val);
         if(val) {
             res.json(new SuccessModel())
         }else {

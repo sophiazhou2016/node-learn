@@ -25,7 +25,6 @@ const getDetail = (id) => {
 const newBlog = (blogData = {}) => {
     // blogData 是一个对象，包含 title content author 属性
     const title = xss(blogData.title)
-    console.log('title is:', title)
     const content = blogData.content
     const author = blogData.author
     const createtime = Date.now()
@@ -47,14 +46,12 @@ const newBlog = (blogData = {}) => {
 const updateBlog = (id, blogData = {}) => {
     // id 就是要更新的博客id
     // blogData 是一个对象，包含 title content 属性
-    console.log('updateBlog,', id, blogData)
     const title = blogData.title
     const content = blogData.content
     const sql = `update blogs set title='${title}', content='${content}' 
         where id='${id}'
     `
     return exec(sql).then(updateData => {
-        console.log('updateData: ', updateData)
         if(updateData.affectedRows > 0) {
             return true
         }
