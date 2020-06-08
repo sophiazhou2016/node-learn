@@ -10,8 +10,8 @@ const server = http.createServer((req, res) => {
     // Stream 是一个流
     // EventEmitter
 
-    const { url, method } = req
-    if(url === '/' && method === 'GET') {
+    const { url, method, headers } = req
+    if (url === '/' && method === 'GET') {
         // 显示一个首页
         fs.readFile('index.html', (err, data) => {
             if(err) { 
@@ -29,6 +29,9 @@ const server = http.createServer((req, res) => {
             'Content-Type': 'application/json'
         })
         res.end(JSON.stringify([{name: 'tom', age: 20}]))
+    } else if (method === 'GET' && headers.accept.indexOf('image/*') !== -1) {
+        // 图片文件服务
+        fs.createReadStream('./' + url).pipe(res)
     } else {
         res.statusCode = 404
         res.setHeader('Content-Type', 'text/plain,charset=utf-8')
