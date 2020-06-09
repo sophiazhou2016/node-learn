@@ -10,6 +10,4 @@ module.exports.clone = async function(repo, desc) {
     process.start()
     await download(repo, desc)
     process.succeed()
-
-    
 }

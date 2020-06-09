@@ -109,3 +109,8 @@
 	```
 	child.stdout.pipe(process.stdout);
 	```
+## 6、fs的使用
+	```
+	fs.readdirSync() // 读文件夹
+	fs.readFileSync() // 读文件
+	```
