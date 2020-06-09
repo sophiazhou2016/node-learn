@@ -90,3 +90,22 @@
 	}
 	```
 
+
+## 5、子进程 child_process 提供了几种创建子进程的方式
+### 1) 首先介绍一下spawn方法
+	```
+	child_process.spawn(command[, args][, options])
+	
+	// command： 要执行的指令
+	// args： 传递参数
+	// options： 配置项
+	```
+	```
+	const { spawn } = require('child_process');
+	const child = spawn('pwd');
+	```
+	*pwd是shell的命令，用于获取当前的目录，上面的代码执行完控制台并没有任何的信息输出，这是为什么呢？
+	控制台之所以不能看到输出信息的原因是由于子进程有自己的stdio流（stdin、stdout、stderr），控制台的输出是与当前进程的stdio绑定的，因此如果希望看到输出信息，可以通过在子进程的stdout 与当前进程的stdout之间建立管道实现*
+	```
+	child.stdout.pipe(process.stdout);
+	```
