@@ -114,3 +114,5 @@
 	fs.readdirSync() // 读文件夹
 	fs.readFileSync() // 读文件
 	```
+
+# koa2 的原理
