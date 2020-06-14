@@ -16,7 +16,7 @@
 	```
 	例子2，使用async/ await 解决异步函数的地狱回调：
 	
-	```javascript
+	```
 	const fs = require('fs')
 	const { promisify } = require('util')
 	const readFile = promisify(fs.readFile)
@@ -27,7 +27,7 @@
 	})
 	```
 	*注意await紧跟着的是一个promise，promisify 是原生node 的 util 库里面支持的。*
-## 2、<Buffer>
+## 2、Buffer
 	```
 	const buf1 = Buffer.alloc(10)
 	const buf2 = Buffer.from('a')
@@ -115,4 +115,24 @@
 	fs.readFileSync() // 读文件
 	```
 
-# koa2 的原理
+# 二、koa2 的原理
+## 1、优雅api: 利用Object 的 get, set 方法 简化. Api
+	```
+	const k = {
+		info: {
+			name: '我是名字'
+		},
+		get name() {
+			return this.info.name
+		},
+		set name(val) {
+			console.log('name is ' + val)
+			this.info.name = val
+		}
+	}
+
+	console.log('1x: ', k.name)
+	k.name = 'Alsa'
+	console.log('2x: ', k.name)
+	```
+## 2、
