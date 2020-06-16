@@ -2,8 +2,6 @@
 
 ## 1. nodejs 里面的异步I/O
 	例子1：
-	
-
 	```javascript
 	const fs = require('fs')
 	fs.readFile('./conf.js',(err, data) => {
@@ -109,6 +107,11 @@
 	```
 	child.stdout.pipe(process.stdout);
 	```
+### 2) execSync
+	```
+	const { execSync } = require('child_process')
+	execSync('npm install && npm run build')
+	```
 ## 6、fs的使用
 	```
 	fs.readdirSync() // 读文件夹
@@ -135,4 +138,31 @@
 	k.name = 'Alsa'
 	console.log('2x: ', k.name)
 	```
-## 2、
+## 2、从函数组合到中间件实现
+	** https://juejin.im/post/5dbf9bdaf265da4d25054f91 **
+## 3、高阶函数：
+>> 入参跟出参都是函数
+# 三、网络编程
+## 1、net 
+	```
+	const net = require('net')
+	const chatServer = net.createServer()
+
+	const clientList = []
+	chatServer.on('connection', client => {
+		client.write('Hi!\n')
+		clientList.push(client)
+		client.on('data', data => {
+			console.log('receive: ', data.toString(), clientList.length)
+			clientList.forEach(v => {
+				v.write(data)
+			})
+		})
+	})
+
+	chatServer.listen(9000)
+	```
+## 2、跨域解决方案
+### a. JSONP
+### b. 代理服务器
+### c. CORS(Cross Origin Resource Share) res.setHeader(Access-Control-Allow-Origin, '可以跨域的网址')
