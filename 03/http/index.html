@@ -2,7 +2,10 @@
 <script>
     (async () => {
         axios.defaults.baseURL = 'http://localhost:4000';
-        const res = await axios.get("/api/users")
+        axios.defaults.withCredentials = true;
+        const res = await axios.get("/api/users", {headers: {
+            'X-Token': 'jilei'
+        }})
         console.log('data',res.data)
         document.writeln(`Response : ${JSON.stringify(res.data)}`)
     })()

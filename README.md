@@ -139,9 +139,9 @@
 	console.log('2x: ', k.name)
 	```
 ## 2、从函数组合到中间件实现
-	** https://juejin.im/post/5dbf9bdaf265da4d25054f91 **
+> https://juejin.im/post/5dbf9bdaf265da4d25054f91 *
 ## 3、高阶函数：
->> 入参跟出参都是函数
+> 入参跟出参都是函数
 # 三、网络编程
 ## 1、net 
 	```
@@ -166,3 +166,22 @@
 ### a. JSONP
 ### b. 代理服务器
 ### c. CORS(Cross Origin Resource Share) res.setHeader(Access-Control-Allow-Origin, '可以跨域的网址')
+
+## 3、axios 作为一个很重要的请求框架，api 需要知道如：
+### a) axios.defaults.baseURL = 'http://localhost:4000'
+### b) axios.defaults.withCredentials = true;
+
+## 4、preflight request(预检请求，会在浏览器里面看到两次请求)
+> 参考资料：https://www.jianshu.com/p/b55086cbd9af
+```
+res.writeHead(200, {
+	"Access-Control-Allow-Origin": "http://localhost:3000",
+	"Access-Control-Allow-Headers": "X-Token,Content-Type",
+	"Access-Control-Allow-Methods": "PUT"
+})
+```
+> 这里可以说是面试必考题了
+
+## 5、如果要携带cookie信息，则请求变为credential请求
+### axios.defaults.withCredentials = true; 跨域访问需要发送cookie时一定要加
+### res.setHeader('Access-Control-Allow-Credentials', 'true');
