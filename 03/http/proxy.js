@@ -1,7 +1,7 @@
  
 // proxy.js
 const express = require('express')
-const {createProxyMiddleware} = require('http-proxy-middleware')
+// const {createProxyMiddleware} = require('http-proxy-middleware')
 
 // console.log('proxy:', proxy)
 const app = express()

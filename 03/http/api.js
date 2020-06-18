@@ -31,6 +31,20 @@ http
                 "Access-Control-Allow-Methods": "PUT"
             })
             res.end()
+        } else if (method === 'POST' && url === '/api/save') {
+            let reqData = []
+            let size = 0
+            req.on('data', data => {
+                console.log('>>> req on', data)
+                reqData.push(data)
+                size += data.length
+            })
+            req.on('end', () => {
+                console.log('end')
+                const data = Buffer.concat(reqData, size);
+                console.log('data:', size, data.toString())
+                res.end(`formdata:${data.toString()}`)
+            })
         }
     })
     .listen(4000, () => {

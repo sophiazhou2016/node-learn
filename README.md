@@ -185,3 +185,21 @@ res.writeHead(200, {
 ## 5、如果要携带cookie信息，则请求变为credential请求
 ### axios.defaults.withCredentials = true; 跨域访问需要发送cookie时一定要加
 ### res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+## 6、bodyparser
+### post请求的时候用 data 事件监听数据流
+```
+let reqData = []
+	let size = 0
+	req.on('data', data => {
+		console.log('>>> req on', data)
+		reqData.push(data)
+		size += data.length
+	})
+	req.on('end', () => {
+		console.log('end')
+		const data = Buffer.concat(reqData, size);
+		console.log('data:', size, data.toString())
+		res.end(`formdata:${data.toString()}`)
+	})
+```
