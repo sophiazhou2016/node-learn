@@ -27,17 +27,17 @@ const server = http.createServer((request, response) => {
         // })
 
         // 流事件写入
-        // request.on('data', data => {
-        //     console.log('data:',data)
-        //     fis.write(data)
-        // })
-        // request.on('end', () => {
-        //     fis.end()
-        //     response.end()
-        // })
+        request.on('data', data => {
+            console.log('data:',data)
+            fis.write(data)
+        })
+        request.on('end', () => {
+            fis.end()
+            response.end()
+        })
 
-
-        request.pipe(fis)
+        // 第1种方式，两个流对接，存在的问题：大文件分包
+        // request.pipe(fis)
         response.end()
 
     } else {

@@ -186,9 +186,16 @@ res.writeHead(200, {
 ### axios.defaults.withCredentials = true; 跨域访问需要发送cookie时一定要加
 ### res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-## 6、bodyparser
-### post请求的时候用 data 事件监听数据流
+## 6、bodyparser（post请求的时候用 data 事件监听数据流）
 ```
+const fis = fs.createWriteStream(outputFile)
+```
+#### a)两个流对接 pipe
+```
+request.pipe(fis)
+```
+### b) Buffer connect
+```js
 let reqData = []
 	let size = 0
 	req.on('data', data => {
@@ -202,4 +209,15 @@ let reqData = []
 		console.log('data:', size, data.toString())
 		res.end(`formdata:${data.toString()}`)
 	})
+```
+### c) 流事件写入
+```js
+request.on('data', data => {
+    console.log('data:',data)
+    fis.write(data)
+})
+request.on('end', () => {
+    fis.end()
+   	response.end()
+ })
 ```
