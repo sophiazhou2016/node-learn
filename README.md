@@ -244,3 +244,6 @@ request.on('end', () => {
 		})
 	}
 ```
+## 8、即时通讯
+### a) setInterval 轮询
+### b) socket.io
