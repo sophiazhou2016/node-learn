@@ -296,4 +296,31 @@ request.on('end', () => {
 	})
 ```
 
-## 2、
+## 2、promise-mysql2
+* mysql的同步写法*
+
+## 3、Sequelize:基于Promise的ORM(Object Relation Mapping)，是一种数据库中间件 支持多种数据库、事务、关联等
+```js
+(async() => {
+    const Sequelize = require('sequelize')
+
+    // 建立链接
+    const sequelize = new Sequelize('mytest', 'root', 'Aa123456', {
+        host: 'localhost',
+        dialect: 'mysql',
+        operatorAliases: false
+    })
+
+    // 定义模型
+    const Fruit = sequelize.define('Fruit', {
+        name: { type: Sequelize.STRING(20), allowNull: false },
+        price: { type: Sequelize.FLOAT, allowNull: false },
+        stock: { type: Sequelize.INTEGER, defaultValue: 0 }
+	})
+	// 执行这个就创建了 Fruits 表 ，为啥 Fruits 多了 s
+	
+	// 同步
+	let ret = Fruit.sync()
+	console.log('ret:', ret)
+})()
+```
