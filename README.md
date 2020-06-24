@@ -251,54 +251,49 @@ request.on('end', () => {
 # 四、mysql
 ## 1、文件系统(readline 是一个很有意思的东西，node内置，可以读取命令行)
 ```js
-const fs = require('fs')
+	const fs = require('fs')
 
-function set(key, value) {
-    fs.readFile('./db.json', (err, data) => {
-        const json = data ? JSON.parse(data) : {}
-        json[key] = value
-        // 重新写入文件
-        fs.writeFile('./db.json', JSON.stringify(json), err => {
-            if(err) {
-                console.log(err)
-            }
-            console.log('写入成功')
-        })
-    })
-}
+	function set(key, value) {
+		fs.readFile('./db.json', (err, data) => {
+			const json = data ? JSON.parse(data) : {}
+			json[key] = value
+			// 重新写入文件
+			fs.writeFile('./db.json', JSON.stringify(json), err => {
+				// 。。。
+			})
+		})
+	}
 
-function get(key) {
-    fs.readFile('./db.json', (err, data) =>{
-        if(err) {
-            console.log(err)
-        }
-        const json = JSON.parse(data)
-        console.log(json[key])
-    })
-}
+	function get(key) {
+		fs.readFile('./db.json', (err, data) =>{
+			// ...
+		})
+	}
 
-// 命令行接口
-const readline = require('readline')
-const rl = readline.createInterface({
-    input: process.stdin,
-    ouput: process.stdout
-})
+	// 命令行接口
+	const readline = require('readline')
+	const rl = readline.createInterface({
+		input: process.stdin,
+		ouput: process.stdout
+	})
 
-// set a 1
-rl.on('line', input => {
-    const [op, key, value] = input.split(' ')
-    if(op === 'get') {
-        get(key)
-    } else if(op === 'set') {
-        set(key, value)
-    } else if(op === 'quit') {
-        rl.close()
-    } else {
-        console.log('没有该操作')
-    }
-})
+	// set a 1
+	rl.on('line', input => {
+		const [op, key, value] = input.split(' ')
+		if(op === 'get') {
+			get(key)
+		} else if(op === 'set') {
+			set(key, value)
+		} else if(op === 'quit') {
+			rl.close()
+		} else {
+			console.log('没有该操作')
+		}
+	})
 
-rl.on('close', () => {
-    process.exit(0)
-})
+	rl.on('close', () => {
+		process.exit(0)
+	})
 ```
+
+## 2、
