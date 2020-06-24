@@ -11,13 +11,20 @@
 
     // 定义模型
     const Fruit = sequelize.define('Fruit', {
+        id: {
+            type: Sequelize.DataTypes.UUID,
+            defaultValue: Sequelize.DataTypes.UUIDV1,
+            primaryKey: true
+        },
         name: { type: Sequelize.STRING(20), allowNull: false },
         price: { type: Sequelize.FLOAT, allowNull: false },
         stock: { type: Sequelize.INTEGER, defaultValue: 0 }
+    }, {
+        tableName: 'TBL_FRUIT'
     })
 
     // 同步
-    let ret = await Fruit.sync()
+    let ret = await Fruit.sync({force: true})
     console.log('ret 1:', ret)
 
     // 添加
